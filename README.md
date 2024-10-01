@@ -1,31 +1,51 @@
-# Binary-Classification-of-Machine-Failures
-This dataset is modeled after an existing milling machine and our objective is to predict the probability of Machine failure.
-## Dataset Details
-According to the documentation of the Predictive Maintenance Dataset, properties of dataset features are defined below:
+# Predictive Maintenance using Machine Learning
 
-Type: consisting of a letter L, M, or H for Low, Medium and High as product quality variants.
+# Overview
 
-Air temperature [K]: generated using a random walk process later normalized to a standard deviation of 2 K around 300 K.
+This project focuses on Machine Failure Prediction by analyzing various independent failure modes. The machine failure prediction model helps businesses that rely on machinery to prevent downtime by identifying potential failures before they occur. The project leverages several machine learning models to predict failures based on multiple failure modes.
 
-Process temperature [K]: generated using a random walk process normalized to a standard deviation of 1 K, added to the air temperature plus 10 K.
+# Failure Modes
 
-Rotational speed [rpm]: calculated from a power of 2860 W, overlaid with a normally distributed noise.
+The machine failure is determined based on the following five independent failure modes:
 
-Torque [Nm]: torque values are normally distributed around 40 Nm with a Ïƒ = 10 Nm and no negative values.
+	1.	Tool Wear Failure (TWF): Failure due to tool wear.
+	2.	Heat Dissipation Failure (HDF): Failure due to inadequate heat dissipation.
+	3.	Power Failure (PWF): Failure due to power loss or fluctuation.
+	4.	Overstrain Failure (OSF): Failure caused by excessive strain on the machine.
 
-Tool wear [min]: The quality variants H/M/L add 5/3/2 minutes of tool wear to the used tool in the process.
+If any of these failure modes are detected, the machine failure label is set to 1 (i.e., machine failure).
 
-Machine failure: whether the machine has failed in this particular datapoint for any of the following failure modes are true.
+# Objective
 
-The machine failure consists of five independent failure modes:
+The goal of this project is to predict machine failure by analyzing the above failure modes using machine learning models. By implementing predictive analytics, businesses can:
 
-Tool wear failure (TWF): the tool will be replaced of fail at a randomly selected tool wear time between 200 ~ 240 mins.
+	•	Proactively detect failures before they occur.
+	•	Reduce costly downtime due to unexpected machine failures.
+	•	Optimize maintenance schedules and improve overall productivity.
 
-Heat dissipation failure (HDF): heat dissipation causes a process failure, if the difference between air and process temperature is below 8.6 K and the rotational speed is below 1380 rpm.
+## Dataset
 
-Power failure (PWF): the product of torque and rotational speed (in rad/s) equals the power required for the process. If this power is below 3500 W or above 9000 W, the process fails.
+The dataset includes the following features:
 
-Overstrain failure (OSF): if the product of tool wear and torque exceeds 11,000 minNm for the L product variant (12,000 M, 13,000 H), the process fails due to overstrain. 
-random failures (RNF): each process has a chance of 0,1 % to fail regardless of its process parameters.
+	•	Failure modes: TWF, HDF, PWF, OSF
+	•	Target label: Machine failure (1 for failure, 0 for no failure)
 
-If at least one of the above failure modes is true, the process fails and the 'machine failure' label is set to 1.
+The dataset is used to train and test the machine learning models to predict whether a machine will fail based on the input failure modes.
+
+### Data Format
+The training dataset includes the following columns:
+- `id`: Unique identifier for each record.
+- `Machine failure`: Binary label indicating whether a machine failure occurred (1) or not (0).
+- Various features related to machine operations, including product IDs, machine types, and operational metrics.
+
+## Key Features
+- **Exploratory Data Analysis (EDA)**: Data cleaning, visualization, and analysis of feature distributions.
+- **Feature Engineering**: Normalization of numerical features and one-hot encoding of categorical features.
+- **Modeling**: Implementation of multiple machine learning algorithms, including:
+  - Random Forest Classifier
+  - Decision Tree Classifier
+  - Support Vector Classifier (SVC)
+  - CatBoost Classifier
+- **Model Evaluation**: Evaluation of models using accuracy, F1 score, confusion matrices, and ROC curves.
+- **Hyperparameter Tuning**: Use of RandomizedSearchCV to optimize model hyperparameters.
+
